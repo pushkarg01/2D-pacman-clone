@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //public static GameManager Instance;
+    #region Variables
 
     public Ghost[] ghots;
     public Pacman pacman;
     public Transform pellets;
 
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI livesText;
+
     public int score { get; private set; }
     public int lives { get; private set; }
-
     public int ghostMultiplier { get; private set; } = 1;
+  #endregion
 
     private void Start()
     {
@@ -69,11 +73,13 @@ public class GameManager : MonoBehaviour
     private void SetScore(int score)
     {
         this.score = score;
+        scoreText.text = score.ToString().PadLeft(2,'0');
     }
 
     private void SetLives(int lives)
     {
         this.lives = lives;
+        livesText.text ="x"+lives.ToString();
     }
 
     public void GhostEaten(Ghost ghost)

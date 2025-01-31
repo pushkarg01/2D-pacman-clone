@@ -10,6 +10,9 @@ public class Pacman : MonoBehaviour
     {
         this.move = GetComponent<Movement>();
     }
+
+    #region Update Movements
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -32,6 +35,7 @@ public class Pacman : MonoBehaviour
         float angle = Mathf.Atan2(this.move.direction.y, this.move.direction.x);
         this.transform.rotation =Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
     }
+    #endregion
 
     public void ResetState()
     {
