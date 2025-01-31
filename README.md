@@ -16,6 +16,5 @@ Clone of the classic Pac-Man game, built in Unity using the Tilemap system for e
 
 ## Gameplay ScreenShot
 
-![Screenshot (259)](https://github.com/user-attachments/assets/c1a96cba-f6b5-4897-ab98-d7370d244006)
 
   
