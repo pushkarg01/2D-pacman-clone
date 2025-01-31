@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI gameOverText;
 
     public int score { get; private set; }
     public int lives { get; private set; }
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     void NewGame()
     {
+        gameOverText.gameObject.SetActive(false);
         SetScore(0);
         SetLives(3);
         NewRound();
@@ -68,12 +70,13 @@ public class GameManager : MonoBehaviour
         }
 
         this.pacman.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(true);
     }
 
     private void SetScore(int score)
     {
         this.score = score;
-        scoreText.text = score.ToString().PadLeft(2,'0');
+        scoreText.text = score.ToString();
     }
 
     private void SetLives(int lives)
