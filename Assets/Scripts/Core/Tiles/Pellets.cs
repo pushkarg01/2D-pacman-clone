@@ -7,7 +7,13 @@ public class Pellets : MonoBehaviour
 {
     public int points = 10;
 
-    [Inject] protected GameEvents gameEvents;
+    private GameEvents gameEvents;
+
+    [Inject]
+    private void Construct(GameEvents gameEvents)
+    {
+        this.gameEvents = gameEvents;
+    }
 
     protected virtual void Eat()
     {

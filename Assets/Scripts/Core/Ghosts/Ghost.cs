@@ -20,7 +20,7 @@ public class Ghost : MonoBehaviour
     [Inject]
     private void Construct(GameEvents gameEvents)
     {
-        gameEvents = gameEvents;
+        this.gameEvents = gameEvents;
     }
 
     private void Awake()
