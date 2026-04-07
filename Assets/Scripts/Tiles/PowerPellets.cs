@@ -8,7 +8,6 @@ public class PowerPellets : Pellets
 
     protected override void Eat()
     {
-        FindObjectOfType<GameManager>().PowerPelletEaten(this);
+        this.gameplayEvents.PowerPelletEaten(this);
     }
-
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Ghost : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class Ghost : MonoBehaviour
     public Transform target;
 
     public int points = 200;
+
+    private IGameplayEvents gameplayEvents;
+
+    [Inject]
+    private void Construct(IGameplayEvents gameplayEvents)
+    {
+        this.gameplayEvents = gameplayEvents;
+    }
 
     private void Awake()
     {
@@ -55,11 +64,11 @@ public class Ghost : MonoBehaviour
         {
             if (this.frightened.enabled)
             {
-                FindObjectOfType<GameManager>().GhostEaten(this);
+                this.gameplayEvents.GhostEaten(this);
             }
             else
             {
-                FindObjectOfType<GameManager>().PacmanEaten();
+                this.gameplayEvents.PacmanEaten();
             }
         }
     }

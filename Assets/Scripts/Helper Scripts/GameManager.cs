@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IGameplayEvents
 {
     #region Variables
 
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
     public int ghostMultiplier { get; private set; } = 1;
-  #endregion
+    #endregion
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (this.lives <=0 && Input.anyKeyDown)
+        if (this.lives <= 0 && Input.anyKeyDown)
         {
             NewGame();
         }
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        for(int i = 0; i < this.ghots.Length; i++)
+        for (int i = 0; i < this.ghots.Length; i++)
         {
             this.ghots[i].gameObject.SetActive(false);
         }
@@ -82,25 +82,25 @@ public class GameManager : MonoBehaviour
     private void SetLives(int lives)
     {
         this.lives = lives;
-        livesText.text ="x"+lives.ToString();
+        livesText.text = "x" + lives.ToString();
     }
 
     public void GhostEaten(Ghost ghost)
     {
-        int points =ghost.points *this.ghostMultiplier;
+        int points = ghost.points * this.ghostMultiplier;
         SetScore(this.score + points);
         this.ghostMultiplier++;
     }
 
     public void PacmanEaten()
     {
-        this.pacman.gameObject.SetActive(false );
+        this.pacman.gameObject.SetActive(false);
 
-        SetLives(this.lives -1);
+        SetLives(this.lives - 1);
 
-        if(this.lives > 0)
+        if (this.lives > 0)
         {
-           Invoke("ResetState",3f);
+            Invoke("ResetState", 3f);
         }
         else
         {
@@ -110,13 +110,13 @@ public class GameManager : MonoBehaviour
 
     public void PelletEaten(Pellets pallet)
     {
-        pallet.gameObject.SetActive(false );
+        pallet.gameObject.SetActive(false);
 
         SetScore(this.score + pallet.points);
 
         if (!HasRemainingPallet())
         {
-            this.pacman.gameObject.SetActive(false ) ;
+            this.pacman.gameObject.SetActive(false);
 
             Invoke("NewRound", 3f);
         }
@@ -143,11 +143,12 @@ public class GameManager : MonoBehaviour
                 return true;
             }
         }
+
         return false;
     }
 
     private void ResetGhostMultiplier()
     {
-        this .ghostMultiplier = 1;
+        this.ghostMultiplier = 1;
     }
 }
