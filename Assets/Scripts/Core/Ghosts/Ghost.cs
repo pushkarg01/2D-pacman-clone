@@ -13,24 +13,23 @@ public class Ghost : MonoBehaviour
 
     public GhostBehaviour initialBehaviour;
     public Transform target;
-
     public int points = 200;
 
-    private IGameplayEvents gameplayEvents;
+    private GameEvents gameEvents;
 
     [Inject]
-    private void Construct(IGameplayEvents gameplayEvents)
+    private void Construct(GameEvents gameEvents)
     {
-        this.gameplayEvents = gameplayEvents;
+        gameEvents = gameEvents;
     }
 
     private void Awake()
     {
-        this.move = GetComponent<Movement>();
-        this.home = GetComponent<GhostHome>();
-        this.scatter = GetComponent<GhostScatter>();
-        this.chase = GetComponent<GhostChase>();
-        this.frightened = GetComponent<GhostFrightened>();  
+        move = GetComponent<Movement>();
+        home = GetComponent<GhostHome>();
+        scatter = GetComponent<GhostScatter>();
+        chase = GetComponent<GhostChase>();
+        frightened = GetComponent<GhostFrightened>();
     }
 
     private void Start()
@@ -40,36 +39,43 @@ public class Ghost : MonoBehaviour
 
     public void ResetState()
     {
-        this.gameObject.SetActive(true);
-        this.move.ResetState();
+        gameObject.SetActive(true);
+        move.ResetState();
 
-        this.frightened.Disable();
-        this.chase.Disable();
-        this.scatter.Enable();
+        frightened.Disable();
+        chase.Disable();
+        scatter.Enable();
 
-        if (this.home != this.initialBehaviour)
+        if (home != initialBehaviour)
         {
-            this.home.Disable();
+            home.Disable();
         }
-        
-        if(this.initialBehaviour != null)
+
+        if (initialBehaviour != null)
         {
-            this.initialBehaviour.Enable();
+            initialBehaviour.Enable();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Pacman"))
         {
-            if (this.frightened.enabled)
-            {
-                this.gameplayEvents.GhostEaten(this);
-            }
-            else
-            {
-                this.gameplayEvents.PacmanEaten();
-            }
+            return;
+        }
+
+        if (gameEvents == null)
+        {
+            return;
+        }
+
+        if (frightened.enabled)
+        {
+            gameEvents.RaiseGhostEaten(this);
+        }
+        else
+        {
+            gameEvents.RaisePacmanEaten();
         }
     }
 }

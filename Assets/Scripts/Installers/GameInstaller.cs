@@ -1,16 +1,13 @@
-using Zenject;
 using UnityEngine;
+using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<GameManager>()
-            .FromComponentInHierarchy()
-            .AsSingle();
+        Container.Bind<GameEvents>().AsSingle().NonLazy();
 
-        Container.Bind<IGameplayEvents>()
-            .To<GameManager>()
-            .FromResolve();
+        Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

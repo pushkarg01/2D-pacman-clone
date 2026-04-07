@@ -10,7 +10,7 @@ public class Node : MonoBehaviour
 
     private void Start()
     {
-        this.availableDirection = new List<Vector2>();
+        availableDirection = new List<Vector2>();
 
         CheckAvailableDirection(Vector2.up);
         CheckAvailableDirection(Vector2.down);
@@ -20,11 +20,11 @@ public class Node : MonoBehaviour
 
     private void CheckAvailableDirection(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, Vector2.one * 0.5f, 0.0f, direction, 1f, this.obstacleLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.5f, 0.0f, direction, 1f, obstacleLayer);
 
         if(hit.collider == null)
         {
-            this.availableDirection.Add(direction);
+            availableDirection.Add(direction);
         }
     }
 }

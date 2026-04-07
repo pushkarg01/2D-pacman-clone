@@ -7,17 +7,12 @@ public class Pellets : MonoBehaviour
 {
     public int points = 10;
 
-    protected IGameplayEvents gameplayEvents;
-
-    [Inject]
-    private void Construct(IGameplayEvents gameplayEvents)
-    {
-        this.gameplayEvents = gameplayEvents;
-    }
+    [Inject] protected GameEvents gameEvents;
 
     protected virtual void Eat()
     {
-        this.gameplayEvents.PelletEaten(this);
+        if (gameEvents == null) return;
+        gameEvents.RaisePelletEaten(this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

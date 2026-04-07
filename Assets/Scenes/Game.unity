@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 390201409}
   - component: {fileID: 390201408}
   - component: {fileID: 390201407}
+  - component: {fileID: 390201411}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -329,6 +330,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &390201411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390201406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c7446184648224ca654b5ab2fb4763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Core::UIManager
+  scoreText: {fileID: 2052780008}
+  livesText: {fileID: 1390300662}
+  gameOverText: {fileID: 1851413870}
 --- !u!114 &435195932 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2892991167063588839, guid: 96273adcd3df5ab42830f1920088bc16, type: 3}
@@ -441,7 +457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Zenject::Zenject.SceneContext
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 587616361}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -984,16 +1001,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1417867efc4d448b2f6af2863aaa8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghots:
+  ghosts:
   - {fileID: 435195932}
   - {fileID: 301369893}
   - {fileID: 2020171247}
   - {fileID: 538185147}
   pacman: {fileID: 1455335388}
   pellets: {fileID: 1459731008}
-  scoreText: {fileID: 2052780008}
-  livesText: {fileID: 1390300662}
-  gameOverText: {fileID: 1851413870}
 --- !u!1 &1090169615
 GameObject:
   m_ObjectHideFlags: 0
@@ -10216,7 +10230,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: 'Game Over
+
+    Press to start
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10243,8 +10261,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

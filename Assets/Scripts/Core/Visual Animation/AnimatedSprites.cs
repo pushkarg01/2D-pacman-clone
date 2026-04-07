@@ -16,29 +16,29 @@ public class AnimatedSprites : MonoBehaviour
 
     private void Awake()
     {
-       this.spriteRenderer = GetComponent<SpriteRenderer>();
+       spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
-        InvokeRepeating("Advance",this.animationTime,this.animationTime);
+        InvokeRepeating("Advance",animationTime,animationTime);
     }
 
     private void Advance()
     {
-        if(!this.spriteRenderer.enabled) return;
+        if(!spriteRenderer.enabled) return;
 
-        this.animationFrame++;
-        if(this.animationFrame >= this.sprites.Length  && this.isLoop) { this.animationFrame = 0; }
+        animationFrame++;
+        if(animationFrame >= sprites.Length  && isLoop) { animationFrame = 0; }
 
-        if (this.animationFrame >= 0 && this.animationFrame < this.sprites.Length)
+        if (animationFrame >= 0 && animationFrame < sprites.Length)
         {
-            this.spriteRenderer.sprite = this.sprites[this.animationFrame];
+            spriteRenderer.sprite = sprites[animationFrame];
         }
     }
 
     public void RestartAnim()
     {
-        this.animationFrame = -1;
+        animationFrame = -1;
 
         Advance();
     }

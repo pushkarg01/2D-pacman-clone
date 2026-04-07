@@ -13,7 +13,7 @@ public class GhostHome : GhostBehaviour
 
     private void OnDisable()
     {
-        if (this.gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             StartCoroutine(ExitTransition());
         }
@@ -21,27 +21,27 @@ public class GhostHome : GhostBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (this.enabled && collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (enabled && collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            this.ghost.move.SetDirection(-this.ghost.move.direction);
+            ghost.move.SetDirection(-ghost.move.direction);
         }
     }
 
     private IEnumerator ExitTransition()
     {
-        this.ghost.move.SetDirection(Vector2.up,true);
-        this.ghost.move.rb.isKinematic = true;
-        this.ghost.move.enabled = false;
+        ghost.move.SetDirection(Vector2.up,true);
+        ghost.move.rb.isKinematic = true;
+        ghost.move.enabled = false;
 
-        Vector3 position = this.transform.position;
+        Vector3 position = transform.position;
         float duration = 0.5f;
         float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
-            Vector3 newPos = Vector3.Lerp(position, this.inside.position,elapsed /duration);
+            Vector3 newPos = Vector3.Lerp(position, inside.position,elapsed /duration);
             newPos.z = position.z;
-            this.ghost.transform.position = newPos;
+            ghost.transform.position = newPos;
             elapsed += Time.deltaTime;
 
             yield return null;
@@ -51,17 +51,17 @@ public class GhostHome : GhostBehaviour
 
         while (elapsed < duration)
         {
-            Vector3 newPos = Vector3.Lerp(this.inside.position, this.outside.position, elapsed / duration);
+            Vector3 newPos = Vector3.Lerp(inside.position, outside.position, elapsed / duration);
             newPos.z = position.z;
-            this.ghost.transform.position = newPos;
+            ghost.transform.position = newPos;
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        this.ghost.move.SetDirection(new Vector2(Random.value < 0.5f ? -1f:1f,0),true);
-        this.ghost.move.rb.isKinematic = false;
-        this.ghost.move.enabled = true;
+        ghost.move.SetDirection(new Vector2(Random.value < 0.5f ? -1f:1f,0),true);
+        ghost.move.rb.isKinematic = false;
+        ghost.move.enabled = true;
     }
 
     

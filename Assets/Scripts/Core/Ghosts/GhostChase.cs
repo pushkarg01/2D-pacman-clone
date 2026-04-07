@@ -6,22 +6,22 @@ public class GhostChase : GhostBehaviour
 {
     private void OnDisable()
     {
-        this.ghost.scatter.Enable();
+        ghost.scatter.Enable();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Node node = other.GetComponent<Node>();
 
-        if (node != null && this.enabled && !this.ghost.frightened.enabled)
+        if (node != null && enabled && !ghost.frightened.enabled)
         {
             Vector2 direction = Vector2.zero;
             float minDistance = float.MaxValue;
 
             foreach (Vector2 availableDiection in node.availableDirection)
             {
-                Vector3 newPosition = this.transform.position + new Vector3(availableDiection.x, availableDiection.y, 0f);
-                float distance = (this.ghost.target.position - newPosition).sqrMagnitude;
+                Vector3 newPosition = transform.position + new Vector3(availableDiection.x, availableDiection.y, 0f);
+                float distance = (ghost.target.position - newPosition).sqrMagnitude;
 
                 if (distance < minDistance)
                 {
@@ -29,7 +29,7 @@ public class GhostChase : GhostBehaviour
                     minDistance = distance;
                 }
             }
-            this.ghost.move.SetDirection(direction);
+            ghost.move.SetDirection(direction);
         }
     }
 }

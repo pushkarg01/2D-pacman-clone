@@ -19,8 +19,8 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
-        this.rb = GetComponent<Rigidbody2D>();
-        this.startDirection = this.transform.position;
+        rb = GetComponent<Rigidbody2D>();
+        startDirection = transform.position;
     }
 
     private void Start()
@@ -30,47 +30,47 @@ public class Movement : MonoBehaviour
 
     public void ResetState()
     {
-        this.speedMultipiler = 1f;
-        this.direction = this.initialDirecction;
-        this.nextDirection = Vector2.zero;
-        this.transform.position = this.startDirection;
-        this.rb.isKinematic = false;
-        this.enabled = true;
+        speedMultipiler = 1f;
+        direction = initialDirecction;
+        nextDirection = Vector2.zero;
+        transform.position = startDirection;
+        rb.isKinematic = false;
+        enabled = true;
     }
 
     private void Update()
     {
-        if (this.nextDirection != Vector2.zero)
+        if (nextDirection != Vector2.zero)
         {
-            SetDirection(this.nextDirection);
+            SetDirection(nextDirection);
         }
     }
 
     private void FixedUpdate()
     {
-        Vector2 position = this.rb.position;
-        Vector2 translation = this.direction * this.speed * Time.fixedDeltaTime;
+        Vector2 position = rb.position;
+        Vector2 translation = direction * speed * Time.fixedDeltaTime;
 
-        this.rb.MovePosition(position+translation);
+        rb.MovePosition(position+translation);
     }
 
     public void SetDirection(Vector2 direction,bool forced =false)
     {
         if ( forced || !Occupied(direction))
         {
-            this.direction = direction;
-            this.nextDirection = Vector2.zero;
+            direction = direction;
+            nextDirection = Vector2.zero;
 
         }
         else
         {
-            this.nextDirection =direction;
+            nextDirection =direction;
         } 
     }
 
     public bool Occupied(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, Vector2.one * 0.75f, 0.0f, direction, 1.5f,this.obstacleLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.75f, 0.0f, direction, 1.5f,obstacleLayer);
 
         return hit.collider != null;
     }

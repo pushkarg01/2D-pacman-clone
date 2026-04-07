@@ -6,17 +6,17 @@ public class GhostScatter : GhostBehaviour
 {
     private void OnDisable()
     {
-        this.ghost.chase.Enable();
+        ghost.chase.Enable();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Node node = other.GetComponent<Node>();
 
-        if(node != null && this.enabled && !this.ghost.frightened.enabled)
+        if(node != null && enabled && !ghost.frightened.enabled)
         {
             int index = Random.Range(0,node.availableDirection.Count);
-            if (node.availableDirection[index] == -this.ghost.move.direction && node.availableDirection.Count >1)
+            if (node.availableDirection[index] == -ghost.move.direction && node.availableDirection.Count >1)
             {
                 index++;
 
@@ -25,7 +25,7 @@ public class GhostScatter : GhostBehaviour
                     index = 0;
                 }
             }
-            this.ghost.move.SetDirection(node.availableDirection[index]);
+            ghost.move.SetDirection(node.availableDirection[index]);
         }
     }
 }
