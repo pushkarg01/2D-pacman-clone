@@ -9,5 +9,8 @@ public class GameInstaller : MonoInstaller
 
         Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy();
+
+        Container.Bind<Movement>().FromComponentInHierarchy().AsSingle().NonLazy();
+       //  Container.Bind<Ghost>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

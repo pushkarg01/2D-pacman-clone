@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Pacman : MonoBehaviour
 {
-    public Movement move { get; private set; }
+   // public Movement move { get; private set; }
+
+    private Movement move;
+    [Inject]
+    private void Construct(Movement move)
+    {
+        this.move = move;
+    }
 
     private void Awake()
     {
