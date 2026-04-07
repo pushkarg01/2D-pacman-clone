@@ -7,7 +7,7 @@ public class Pellets : MonoBehaviour
 {
     public int points = 10;
 
-    private GameEvents gameEvents;
+    protected GameEvents gameEvents;
 
     [Inject]
     private void Construct(GameEvents gameEvents)
